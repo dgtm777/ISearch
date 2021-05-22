@@ -271,7 +271,11 @@ class ISearch():
     self.suggest_point["wd"] = self.wd1
     self.suggest_point["flag"] = "EarlyStopping"
   def _lrFound(self):
-
+    self.process_flag = "random"
+    self.prev_process = "lr"
+    self.found_lr = self.left_lr
+    self.suggest_point["lr"] = self.found_lr
+    self.suggest_point["start_lr"] = self.suggest_point["lr"]
   def _overfitting(self):
     average_best_test = 0
     average_best_train = 0
