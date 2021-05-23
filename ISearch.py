@@ -239,7 +239,7 @@ class ISearch():
     if self.process_flag == "wd":
       return "Trying to reduce overfitting. Trying to find wd by ternary search. You can also use data augumentation"
     if self.process_flag == "random":
-      return "Using The largest possible LR. Default wd = 0.0001. Other parameters are randomized"
+      return "Using The largest possible LR. Default wd = " + str(self.patience_wd) + ". Other parameters are randomized"
 
   def stopSignal(self, data, flag, patience, parameter, epochs):
     import numpy as np
