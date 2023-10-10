@@ -1,16 +1,9 @@
-Программа написана для использования в colab.research.google.com
+The program is designed for use in colab.research.google.com.
 
-Программа состоит из двух классов. Первый отвечает за связь пользователея с алгоритмом автоматического подбора. Будем называть его Engine. 
-Второй отвечает за подбор параметров. Назовем его ISearch по названию метода. Основными методоми класса ISearch являются функции next_point, add_result и why. 
-next_point возвращает предлагаемую алгоритмом следующую точку дла обучения. Чтобы определить следующую точку ISearch сохраняет у себя наилучшую обученную модель. 
-Сделать это позволяет функция add_result. Класс ISearch не влияет на сам процесс обучения. Он предлагает гиперпараметры для обучения и потом получает результаты. 
-Функция why позволяет пользователю запросить причины выбора следующей точки обучения. 
+The program consists of two classes. The first one is responsible for the user's interaction with the automatic parameter tuning algorithm. We will call it "Engine". The second one is responsible for parameter tuning. We will call it "ISearch", based on the method's name. The primary methods of the ISearch class are next_point, add_result, and why. next_point returns the next point suggested by the algorithm for training. To determine the next point, ISearch keeps the best-trained model. This is made possible by the add_result function. The ISearch class does not affect the actual training process. It suggests hyperparameters for training and later receives the results. The why function allows the user to inquire about the reasons for choosing the next training point.
 
-Engine имеет два доступных пользователю метода - start и upload. start запускает метод с начала, upload позволяет запустить метод с последнего сохранения.
-Стоит отметить, что в функцию add_result могут прийти статистики обучения не той точки, которою предлагал метод, а той, которую выбрал пользователь. 
-Пользователь в свою очередь должен передать в конструктор Engine функцию, которая по заданным гиперпараметрам обучит свою сетку и вернет статистики обучения и саму модель. 
+Engine has two user-accessible methods: start and upload. start initiates the method from the beginning, while upload allows running the method from the last saved state. It's worth noting that the add_result function may receive training statistics for a point that was not suggested by the method but chosen by the user. In turn, the user must provide a function to the Engine constructor that will train their network based on the specified hyperparameters and return training statistics and the model itself.
 
-Функция пользователя помимо гиперпараметров для обучения должна принимать на вход функцию из класса ISearch, которая определит, когда обучение нужно прекратить. Работа прекращается либо когда истекло заданное колличество эпох, либо, когда сетка начала переобучаться. Так реализуется ранняя остановка (early stopping) в пользовательской функции. Таким образом, всего есть три блока: функция, предоставляемая пользователем принимает на вход точку и возвращает статистики, класс ISearch, выбирающий гиперпараметры для обучения, и Engine, который осуществляет связь между пользователем и методом.
-
+In addition to hyperparameters for training, the user's function should take as input a function from the ISearch class that will determine when to stop the training. The work stops either when the specified number of epochs has elapsed or when the network begins to overfit. This implements early stopping in the user's function. Thus, there are three components in total: the user-provided function that takes a point as input and returns statistics, the ISearch class that selects hyperparameters for training, and the Engine that facilitates communication between the user and the method.
 
 https://colab.research.google.com/drive/1aqx-5DzIs4TWW0WmDo-vsVWv49XeG5gU?usp=sharing
